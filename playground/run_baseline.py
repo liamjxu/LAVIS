@@ -27,6 +27,7 @@ def main(args):
             image = vis_processors["eval"](raw_image).unsqueeze(0).to(device)
             return model.generate({"image": image, "prompt": prompt})
     
+        results = []
         correct_cnt = 0
         for idx, row in tqdm(test_df.iterrows()):
             imgname = row['imgname']
@@ -38,10 +39,21 @@ def main(args):
                 generation = generation[0]
             if generation == label:
                 correct_cnt += 1
+            result_entry = {
+                'imgname': imgname,
+                'query': query,
+                'label': label,
+                'generation': generation,
+            }
+            results.append(result_entry)
             if (idx+1) % 200 == 0 or idx == 9:
                 print(f'idx: {idx}, accuracy: {correct_cnt / (idx+1) * 100:.2f}%')
-        
+                with open('results.json', 'w') as f:
+                    json.dump(results, f, indent=4)
+
         print(f'idx: {idx}, accuracy: {correct_cnt / (idx+1) * 100:.2f}%')
+        with open('results.json', 'w') as f:
+            json.dump(results, f, indent=4)
 
 
 def load_chartqa_dataset(split, dataset_path='playground/ChartQA Dataset/'):
@@ -50,6 +62,7 @@ def load_chartqa_dataset(split, dataset_path='playground/ChartQA Dataset/'):
     df_aug = pd.read_json(json_path_aug)
     df_human = pd.read_json(json_path_human)
     df = pd.concat([df_aug, df_human])
+    print(f'The length of the resulting {split} df: {len(df)}')
     return df
 
 
