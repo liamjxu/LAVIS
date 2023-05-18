@@ -32,7 +32,7 @@ def main(args):
             imgname = row['imgname']
             query = row['query']
             label = row['label']
-            image_path = f'ChartQA Dataset/test/png/{imgname}'
+            image_path = f'playground/ChartQA Dataset/test/png/{imgname}'
             generation = image_gen(image_path=image_path, prompt=query)
             if isinstance(generation, list):
                 generation = generation[0]
@@ -44,7 +44,7 @@ def main(args):
         print(f'idx: {idx}, accuracy: {correct_cnt / (idx+1) * 100:.2f}%')
 
 
-def load_chartqa_dataset(split, dataset_path='ChartQA Dataset/'):
+def load_chartqa_dataset(split, dataset_path='playground/ChartQA Dataset/'):
     json_path_aug = os.path.join(dataset_path, split, f"{split}_augmented.json")
     json_path_human = os.path.join(dataset_path, split, f"{split}_human.json")
     df_aug = pd.read_json(json_path_aug)
