@@ -74,7 +74,7 @@ if __name__ == '__main__':
     # Add arguments
     parser.add_argument('--task', type=str, help='task to run', choices=['blip_baseline'])
     parser.add_argument('--model_name', type=str, help='the model name to use', choices=['blip2_t5_instruct'])
-    parser.add_argument('--model_type', type=str, help='the model type to use', choices=['flant5xl'])
+    parser.add_argument('--model_type', type=str, help='the model type to use', choices=['flant5xl', 'flant5xxl'])
     parser.add_argument('--output_filename', type=str, help='the filename to save output generations')
 
     # Parse the arguments
