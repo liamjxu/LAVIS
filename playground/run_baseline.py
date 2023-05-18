@@ -41,12 +41,12 @@ def main(args):
                 correct_cnt += 1
             result_entry = {
                 'imgname': imgname,
-                'query': query,
+                'query': f'Answer this question with one number or one phrase: {query}',
                 'label': label,
                 'generation': generation,
             }
             results.append(result_entry)
-            if (idx+1) % 200 == 0 or idx == 9:
+            if (idx+1) % 100 == 0 or idx == 9:
                 print(f'idx: {idx}, accuracy: {correct_cnt / (idx+1) * 100:.2f}%')
                 with open('results.json', 'w') as f:
                     json.dump(results, f, indent=4)
@@ -62,6 +62,7 @@ def load_chartqa_dataset(split, dataset_path='playground/ChartQA Dataset/'):
     df_aug = pd.read_json(json_path_aug)
     df_human = pd.read_json(json_path_human)
     df = pd.concat([df_aug, df_human])
+    df.reset_index(drop=True)
     print(f'The length of the resulting {split} df: {len(df)}')
     return df
 
