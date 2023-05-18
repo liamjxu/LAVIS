@@ -48,11 +48,11 @@ def main(args):
             results.append(result_entry)
             if (idx+1) % 100 == 0 or idx == 9:
                 print(f'idx: {idx}, accuracy: {correct_cnt / (idx+1) * 100:.2f}%')
-                with open('results.json', 'w') as f:
+                with open(args.output_filename, 'w') as f:
                     json.dump(results, f, indent=4)
 
         print(f'idx: {idx}, accuracy: {correct_cnt / (idx+1) * 100:.2f}%')
-        with open('results.json', 'w') as f:
+        with open(args.output_filename, 'w') as f:
             json.dump(results, f, indent=4)
 
 
@@ -73,6 +73,7 @@ if __name__ == '__main__':
 
     # Add arguments
     parser.add_argument('--task', type=str, help='task to run', choices=['blip_baseline'])
+    parser.add_argument('--output_filename', type=str, help='the filename to save output generations')
 
     # Parse the arguments
     args = parser.parse_args()
