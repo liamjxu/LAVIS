@@ -12,13 +12,14 @@ import os
 
 
 def main(args):
-
     # load data
+    print('loading datasets')
     test_df = load_chartqa_dataset("test")
 
     # main logic
     if args.task == 'blip_baseline':
         # loads InstructBLIP model
+        print('loading models')
         model, vis_processors, _ = load_model_and_preprocess(name="blip2_t5_instruct", model_type="flant5xl", is_eval=True, device=torch.device("cuda"))
 
         def image_gen(image_path, prompt="What is unusual about this image?", device=torch.device("cuda")):
