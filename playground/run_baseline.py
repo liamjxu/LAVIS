@@ -56,6 +56,15 @@ def main(args):
             json.dump(results, f, indent=4)
 
 
+def text_wrap(text, wrap='identity'):
+    if wrap == 'identity':
+        return text
+    elif wrap == 'one_word':
+        return f'Answer this question with one number or one phrase: {text}'
+    elif wrap == 'detect':
+        return f'What symbolic elements are in this image? E.g., numbers, words, colors'
+
+
 def load_chartqa_dataset(split, dataset_path='playground/ChartQA Dataset/'):
     json_path_aug = os.path.join(dataset_path, split, f"{split}_augmented.json")
     json_path_human = os.path.join(dataset_path, split, f"{split}_human.json")
@@ -76,6 +85,7 @@ if __name__ == '__main__':
     parser.add_argument('--model_name', type=str, help='the model name to use', choices=['blip2_t5_instruct'])
     parser.add_argument('--model_type', type=str, help='the model type to use', choices=['flant5xl', 'flant5xxl'])
     parser.add_argument('--output_filename', type=str, help='the filename to save output generations')
+    parser.add_argument('--wrap', type=str, help='wrapping method of the query', choices=['identity', 'one_word', 'detect'])
 
     # Parse the arguments
     args = parser.parse_args()
