@@ -108,8 +108,7 @@ def load_model(name, model_type, is_eval=False, device="cpu", checkpoint=None):
     Returns:
         model (torch.nn.Module): model.
     """
-    new_cache_dir = '/fs/scratch/rng_cr_rtc_hmi_gpu_user_c_lf/xji4syv/.cache/'
-    model = registry.get_model_class(name).from_pretrained(model_type=model_type, cache_dir=new_cache_dir)
+    model = registry.get_model_class(name).from_pretrained(model_type=model_type)
 
     if checkpoint is not None:
         model.load_checkpoint(checkpoint)
@@ -197,7 +196,8 @@ def load_model_and_preprocess(name, model_type, is_eval=False, device="cpu"):
     model_cls = registry.get_model_class(name)
 
     # load model
-    model = model_cls.from_pretrained(model_type=model_type)
+    new_cache_dir = '/fs/scratch/rng_cr_rtc_hmi_gpu_user_c_lf/xji4syv/.cache/'
+    model = model_cls.from_pretrained(model_type=model_type, cache_dir=new_cache_dir)
 
     if is_eval:
         model.eval()
