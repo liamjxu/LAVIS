@@ -61,6 +61,8 @@ def text_wrap(text, wrap='identity'):
         return text
     elif wrap == 'one_word':
         return f'Answer this question with one number or one phrase: {text}'
+    elif wrap == 'zero_cot_one_word':
+        return f"Think step-by-step and answer this question with one number or one phrase: {text}"
     elif wrap == 'detect':
         return 'What symbolic elements are in this image? E.g., numbers, words, colors'
 
