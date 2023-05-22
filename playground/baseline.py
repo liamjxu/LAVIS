@@ -81,10 +81,6 @@ def load_chartqa_dataset(split, dataset_path='playground/ChartQA Dataset/'):
 
 if __name__ == '__main__':
     
-    # set cache dir
-    new_cache_dir = "/fs/scratch/rng_cr_rtc_hmi_gpu_user_c_lf/xji4syv/.cache/huggingface"
-    os.environ["HF_HOME"] = new_cache_dir
-
     parser = argparse.ArgumentParser()
 
     # Add arguments
