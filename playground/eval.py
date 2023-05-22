@@ -26,7 +26,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Add arguments
-    parser.add_argument('--result_filename', type=str, help='result to evaluate', choices=['zero_cot_one_word.json', 'result.json'])
+    parser.add_argument('--result_filename', type=str, help='result to evaluate')
 
     # Parse the arguments
     args = parser.parse_args()
