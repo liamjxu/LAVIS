@@ -64,7 +64,7 @@ def text_wrap(text, wrap='identity'):
     elif wrap == 'zero_cot_one_word':
         return f"Think step-by-step and answer this question with only one number or one phrase: {text}"
     elif wrap == 'detect':
-        return 'Are there any numbers/colors/words/shapes in this image? List them.'
+        return 'List the numbers in this chart'
 
 
 def load_chartqa_dataset(split, dataset_path='playground/ChartQA Dataset/'):
