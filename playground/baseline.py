@@ -87,7 +87,8 @@ if __name__ == '__main__':
     parser.add_argument('--model_name', type=str, help='the model name to use', choices=['blip2_t5_instruct'])
     parser.add_argument('--model_type', type=str, help='the model type to use', choices=['flant5xl', 'flant5xxl'])
     parser.add_argument('--output_filename', type=str, help='the filename to save output generations')
-    parser.add_argument('--wrap', type=str, help='wrapping method of the query', choices=['identity', 'one_word', 'detect'])
+    parser.add_argument('--wrap', type=str, help='wrapping method of the query',
+                        choices=['identity', 'one_word', 'detect', 'zero_cot_one_word'])
 
     # Parse the arguments
     args = parser.parse_args()

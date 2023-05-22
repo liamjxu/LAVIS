@@ -1,4 +1,4 @@
-python playground/run_baseline.py \
+python playground/baseline.py \
 --task blip_baseline \
 --model_name blip2_t5_instruct \
 --model_type flant5xxl \
