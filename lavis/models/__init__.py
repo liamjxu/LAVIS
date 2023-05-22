@@ -108,7 +108,7 @@ def load_model(name, model_type, is_eval=False, device="cpu", checkpoint=None):
     Returns:
         model (torch.nn.Module): model.
     """
-    new_cache_dir = '/fs/scratch/rng_cr_rtc_hmi_gpu_user_c_lf/xji4syv/.cache'
+    new_cache_dir = '/fs/scratch/rng_cr_rtc_hmi_gpu_user_c_lf/xji4syv/.cache/'
     model = registry.get_model_class(name).from_pretrained(model_type=model_type, cache_dir=new_cache_dir)
 
     if checkpoint is not None:
