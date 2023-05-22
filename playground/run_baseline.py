@@ -20,7 +20,7 @@ def main(args):
     if args.task == 'blip_baseline':
         # loads InstructBLIP model
         print('loading models')
-        model, vis_processors, _ = load_model_and_preprocess(name="blip2_t5_instruct", model_type="flant5xl", is_eval=True, device=torch.device("cuda"))
+        model, vis_processors, _ = load_model_and_preprocess(name=args.model_name, model_type=args.model_type, is_eval=True, device=torch.device("cuda"))
 
         def image_gen(image_path, prompt="What is unusual about this image?", device=torch.device("cuda")):
             raw_image = Image.open(image_path).convert("RGB")
@@ -31,7 +31,7 @@ def main(args):
         correct_cnt = 0
         for idx, row in tqdm(test_df.iterrows()):
             imgname = row['imgname']
-            query = text_wrap(row['query'])
+            query = text_wrap(row['query'], wrap=args.wrap)
             label = row['label']
             image_path = f'playground/ChartQA Dataset/test/png/{imgname}'
             generation = image_gen(image_path=image_path, prompt=query)
