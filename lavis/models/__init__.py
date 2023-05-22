@@ -196,8 +196,7 @@ def load_model_and_preprocess(name, model_type, is_eval=False, device="cpu"):
     model_cls = registry.get_model_class(name)
 
     # load model
-    new_cache_dir = '/fs/scratch/rng_cr_rtc_hmi_gpu_user_c_lf/xji4syv/.cache/'
-    model = model_cls.from_pretrained(model_type=model_type, cache_dir=new_cache_dir)
+    model = model_cls.from_pretrained(model_type=model_type)
 
     if is_eval:
         model.eval()
