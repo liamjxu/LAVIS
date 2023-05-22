@@ -31,7 +31,7 @@ def main(args):
         correct_cnt = 0
         for idx, row in tqdm(test_df.iterrows()):
             imgname = row['imgname']
-            query = row['query']
+            query = text_wrap(row['query'])
             label = row['label']
             image_path = f'playground/ChartQA Dataset/test/png/{imgname}'
             generation = image_gen(image_path=image_path, prompt=query)
@@ -41,18 +41,18 @@ def main(args):
                 correct_cnt += 1
             result_entry = {
                 'imgname': imgname,
-                'query': f'Answer this question with one number or one phrase: {query}',
+                'query': query,
                 'label': label,
                 'generation': generation,
             }
             results.append(result_entry)
             if (idx+1) % 100 == 0 or idx == 9:
                 print(f'idx: {idx}, accuracy: {correct_cnt / (idx+1) * 100:.2f}%')
-                with open(args.output_filename, 'w') as f:
+                with open(f'playground/results/{args.output_filename}', 'w') as f:
                     json.dump(results, f, indent=4)
 
         print(f'idx: {idx}, accuracy: {correct_cnt / (idx+1) * 100:.2f}%')
-        with open(args.output_filename, 'w') as f:
+        with open(f'playground/results/{args.output_filename}', 'w') as f:
             json.dump(results, f, indent=4)
 
 
@@ -62,7 +62,7 @@ def text_wrap(text, wrap='identity'):
     elif wrap == 'one_word':
         return f'Answer this question with one number or one phrase: {text}'
     elif wrap == 'detect':
-        return f'What symbolic elements are in this image? E.g., numbers, words, colors'
+        return 'What symbolic elements are in this image? E.g., numbers, words, colors'
 
 
 def load_chartqa_dataset(split, dataset_path='playground/ChartQA Dataset/'):
