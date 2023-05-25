@@ -20,8 +20,10 @@ def main(args):
     print('loading datasets')
     if args.dataset == 'chartqa':
         test_df = load_chartqa_dataset("test")
+        img_root_path = 'playground/ChartQA Dataset/test/png/'
     elif args.dataset == 'num_probe':
         test_df = load_num_probe_dataset()
+        img_root_path = 'playground/num_probe/'
 
     # main logic
     if args.task == 'blip_baseline':
@@ -40,7 +42,7 @@ def main(args):
             imgname = row['imgname']
             query = text_wrap(row['query'], wrap=args.wrap)
             label = row['label']
-            image_path = f'playground/ChartQA Dataset/test/png/{imgname}'
+            image_path = f'{img_root_path}{imgname}'
             generation = image_gen(image_path=image_path, prompt=query)
             if isinstance(generation, list):
                 generation = generation[0]
