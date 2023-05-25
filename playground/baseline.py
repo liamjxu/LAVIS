@@ -18,7 +18,10 @@ setproctitle.setproctitle("baseline")
 def main(args):
     # load data
     print('loading datasets')
-    test_df = load_chartqa_dataset("test")
+    if args.dataset == 'chartqa':
+        test_df = load_chartqa_dataset("test")
+    elif args.dataset == 'num_probe':
+        test_df = load_num_probe_dataset()
 
     # main logic
     if args.task == 'blip_baseline':
@@ -82,6 +85,12 @@ def load_chartqa_dataset(split, dataset_path='playground/ChartQA Dataset/'):
     return df
 
 
+def load_num_probe_dataset(dataset_path='playground/num_probe'):
+    json_path = os.path.join(dataset_path, f"annotation.json")
+    df = pd.read_json(json_path)
+    print(f'The length of the resulting df: {len(df)}')
+    return df
+
 
 if __name__ == '__main__':
     
@@ -89,6 +98,7 @@ if __name__ == '__main__':
 
     # Add arguments
     parser.add_argument('--task', type=str, help='task to run', choices=['blip_baseline'])
+    parser.add_argument('--dataset', type=str, help='dataset to run', choices=['chartqa', 'num_probe'])
     parser.add_argument('--model_name', type=str, help='the model name to use', choices=['blip2_t5_instruct'])
     parser.add_argument('--model_type', type=str, help='the model type to use', choices=['flant5xl', 'flant5xxl'])
     parser.add_argument('--output_filename', type=str, help='the filename to save output generations')
