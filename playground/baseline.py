@@ -9,6 +9,10 @@ from lavis.models import load_model_and_preprocess
 import datasets
 import pandas as pd
 import os
+import setproctitle
+
+
+setproctitle.setproctitle("baseline")
 
 
 def main(args):
